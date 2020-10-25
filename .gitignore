@@ -1,3 +1,6 @@
+.idea
+kotlin-admin-template.iml
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup

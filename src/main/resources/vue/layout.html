@@ -1,0 +1,32 @@
+<!-- You can learn more about JavalinVue at https://javalin.io/documentation#vue-support-javalinvue -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Kotlin Admin Template</title>
+    <meta charset="utf8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <link href="@cdnWebjar/roboto-fontface/0.10.0/css/roboto/roboto-fontface.css" rel="stylesheet">
+    <link href="@cdnWebjar/mdi__font/5.0.45/css/materialdesignicons.css" rel="stylesheet">
+    <link href="@cdnWebjar/vuetify/2.3.15/dist/vuetify.css" rel="stylesheet">
+    <script src="@cdnWebjar/vue/2.6.10/dist/vue.js"></script>
+    <script src="@cdnWebjar/axios/0.20.0/dist/axios.min.js"></script>
+    <script src="@cdnWebjar/vuetify/2.3.15/dist/vuetify.js"></script>
+    <style>@inlineFile("/vue/inline-styles.css")</style>
+    @componentRegistration
+</head>
+<body>
+<main id="main-vue">
+    @routeComponent
+</main>
+<script>
+    (() => {
+        const vue = new Vue({
+            el: "#main-vue",
+            vuetify: new Vuetify(),
+        });
+        vue.$vuetify.theme.setTheme("light", {primary: "#008ab4"});
+    })();
+</script>
+</body>
+</html>
