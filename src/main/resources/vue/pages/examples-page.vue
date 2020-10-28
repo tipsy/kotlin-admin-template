@@ -9,7 +9,7 @@
             It's meant to serve as an example of how to setup controllers and services.
             If you're the owner of an example, you can delete it.
         </p>
-        <v-sheet v-for="example in examples" rounded="lg" class="example pa-5 mt-5">
+        <v-sheet v-for="example in examples" rounded="lg" class="example pa-5 mt-5" :key="example.id">
             {{ example.text }}
             <v-btn v-if="isOwner(example)" icon outlined @click="deleteExample(example.id)" small>
                 <v-icon>mdi-close</v-icon>

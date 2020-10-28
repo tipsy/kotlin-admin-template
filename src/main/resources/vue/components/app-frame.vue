@@ -2,7 +2,7 @@
     <v-app>
         <v-app-bar app color="white" flat>
             <v-container class="py-0 fill-height">
-                <img src="/logo.svg" class="navbar-logo" alt="KAT logo">
+                <img src="/img/logo.svg" class="navbar-logo" alt="KAT logo">
                 <v-spacer></v-spacer>
                 <v-menu v-if="$javalin.state.userInfo" bottom left offset-y>
                     <template #activator="scope">

@@ -17,7 +17,8 @@
 
         <h2 class="mt-5 mb-2">Architecture</h2>
         <p>
-            The project is packaged by feature rather than layer, for example <code>accounts</code> and <code>example</code>.
+            The project is packaged by feature rather than layer, for example
+            <code>accounts</code> and <code>example</code> are packages in the project.
             Each feature has a <code>Controller</code> responsible for handling HTTP input and output,
             and a <code>Service</code> responsible for communicating with a data store
             (typically a database, but could also be an API).

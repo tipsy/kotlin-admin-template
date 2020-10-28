@@ -3,7 +3,7 @@
         <div class="error-illustration-page">
             <h1>{{ title }}</h1>
             <div class="image-wrapper">
-                <img :src="`/undraw_${illustration}.svg`" :alt="title">
+                <img :src="`/img/undraw_${illustration}.svg`" :alt="title">
             </div>
             <div class="text">
                 <slot></slot>

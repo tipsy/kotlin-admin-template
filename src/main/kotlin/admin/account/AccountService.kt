@@ -31,12 +31,19 @@ object AccountService {
         return if (BCrypt.checkpw(password, user.password)) user else null
     }
 
-    fun updateById(id: String, role: Role) {
-
+    fun updateById(id: String, role: Role): Boolean = Database.withHandle<Boolean, Exception> { handle ->
+        val rowsModified = handle.createUpdate("UPDATE account SET role=:role WHERE id=:id")
+            .bind("id", id)
+            .bind("role", role)
+            .execute()
+        return@withHandle rowsModified > 0
     }
 
-    fun deleteById(id: String) {
-
+    fun deleteById(id: String): Boolean = Database.withHandle<Boolean, Exception> { handle ->
+        val rowsModified = handle.createUpdate("DELETE FROM account WHERE id=:id")
+            .bind("id", id)
+            .execute()
+        return@withHandle rowsModified > 0
     }
 
 }

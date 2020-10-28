@@ -13,6 +13,7 @@ enum class Role : JavalinRole {
 
 object AccessManager {
     fun manage(handler: Handler, ctx: Context, permittedRoles: Set<JavalinRole>) {
+        ctx.refreshUserInfo() // make sure role matches database role
         when {
             Role.UNAUTHENTICATED in permittedRoles -> handler.handle(ctx)
             ctx.userInfo == null -> ctx.redirect("/sign-in")
@@ -20,6 +21,10 @@ object AccessManager {
             else -> ctx.status(401)
         }
     }
+}
+
+private fun Context.refreshUserInfo() = this.userInfo?.let {
+    this.userInfo = UserInfo(it.id, AccountService.findById(it.id)!!.role)
 }
 
 data class UserInfo(val id: String, val role: Role) : Serializable // must be serializable to store in session file/db
