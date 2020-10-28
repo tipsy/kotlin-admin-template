@@ -20,8 +20,8 @@
                     flat
                     hide-details>
                 </v-combobox>
-                <v-btn icon outlined @click="deleteAccount(account.id)" small>
-                    <v-icon>mdi-close</v-icon>
+                <v-btn icon color="red lighten-1" @click="deleteAccount(account.id)">
+                    <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </div>
         </v-sheet>

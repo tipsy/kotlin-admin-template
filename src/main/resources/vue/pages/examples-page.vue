@@ -2,7 +2,9 @@
     <app-frame class="examples-page">
         <div class="d-flex justify-space-between align-center mb-3">
             <h1>Examples</h1>
-            <v-btn small depressed @click="createExample()" color="green darken-3" dark>Add example</v-btn>
+            <v-btn small depressed @click="createExample()" color="green darken-2" dark rounded>
+                <v-icon small>mdi-plus</v-icon> Add example
+            </v-btn>
         </div>
         <p>
             This page contains a bunch of examples.
@@ -11,8 +13,8 @@
         </p>
         <v-sheet v-for="example in examples" rounded="lg" class="example pa-5 mt-5" :key="example.id">
             {{ example.text }}
-            <v-btn v-if="isOwner(example)" icon outlined @click="deleteExample(example.id)" small>
-                <v-icon>mdi-close</v-icon>
+            <v-btn v-if="isOwner(example)" icon color="red lighten-1" @click="deleteExample(example.id)">
+                <v-icon>mdi-delete</v-icon>
             </v-btn>
         </v-sheet>
         <h2 v-if="examples.length === 0">
