@@ -1,6 +1,6 @@
-package admin.auth
+package kat.auth
 
-import admin.Database
+import kat.Database
 import org.jdbi.v3.core.kotlin.bindKotlin
 import org.mindrot.jbcrypt.BCrypt
 

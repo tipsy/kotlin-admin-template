@@ -1,4 +1,4 @@
-package admin.auth
+package kat.auth
 
 import io.javalin.http.Context
 import io.javalin.http.Handler

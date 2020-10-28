@@ -1,4 +1,4 @@
-package admin
+package kat
 
 import java.lang.System.getenv
 

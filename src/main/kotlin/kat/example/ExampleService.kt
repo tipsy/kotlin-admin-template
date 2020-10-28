@@ -1,6 +1,6 @@
-package admin.example
+package kat.example
 
-import admin.Database
+import kat.Database
 import org.jdbi.v3.core.kotlin.bindKotlin
 
 object ExampleService {

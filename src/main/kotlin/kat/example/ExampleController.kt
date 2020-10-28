@@ -1,6 +1,6 @@
-package admin.example
+package kat.example
 
-import admin.auth.userInfo
+import kat.auth.userInfo
 import io.javalin.http.Context
 
 object ExampleController {

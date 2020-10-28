@@ -1,9 +1,9 @@
-package admin.util
+package kat.util
 
-import admin.Database
-import admin.auth.AccountService
-import admin.auth.Role
-import admin.example.ExampleService
+import kat.Database
+import kat.auth.AccountService
+import kat.auth.Role
+import kat.example.ExampleService
 
 // database-setup/reset
 fun main() {

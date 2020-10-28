@@ -1,9 +1,8 @@
-package admin.auth
+package kat.auth
 
 import io.javalin.http.BadRequestResponse
 import io.javalin.http.Context
 import io.javalin.http.util.RateLimit
-import io.javalin.http.util.RateLimiter
 import java.util.concurrent.TimeUnit
 
 data class Credentials(val userId: String, val password: String)

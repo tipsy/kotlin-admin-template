@@ -1,4 +1,4 @@
-package admin.auth
+package kat.auth
 
 import org.eclipse.jetty.server.session.*
 import java.io.File

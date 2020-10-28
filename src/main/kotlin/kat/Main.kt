@@ -1,12 +1,12 @@
-package admin
+package kat
 
-import admin.account.AccountController
-import admin.auth.AccessManager
-import admin.auth.AuthController
-import admin.auth.Role.*
-import admin.auth.Session
-import admin.auth.userInfo
-import admin.example.ExampleController
+import kat.account.AccountController
+import kat.auth.AccessManager
+import kat.auth.AuthController
+import kat.auth.Role.*
+import kat.auth.Session
+import kat.auth.userInfo
+import kat.example.ExampleController
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.core.security.SecurityUtil.roles
