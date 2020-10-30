@@ -19,4 +19,18 @@ class TestPages : BaseBrowserTest() {
         assertThat(chrome.pageSource).contains("This page contains a bunch of examples")
     }
 
+    @Test
+    fun `accounts page not available to non-admins`() = runTest(Role.USER) {
+        chrome.get("$origin/accounts")
+        assertThat(chrome.pageSource).doesNotContain("This page shows all the user-accounts")
+        assertThat(chrome.pageSource).contains("There's a rumor that the admin credentials")
+    }
+
+    @Test
+    fun `accounts page available to admins`() = runTest(Role.ADMIN) {
+        chrome.get("$origin/accounts")
+        assertThat(chrome.pageSource).contains("This page shows all the user-accounts")
+        assertThat(chrome.pageSource).doesNotContain("There's a rumor that the admin credentials")
+    }
+
 }

@@ -24,6 +24,10 @@ open class BaseBrowserTest  {
             app = createApp().apply { config.showJavalinBanner = false }.start(0)
             origin = "http://localhost:${app.port()}"
             WebDriverManager.chromedriver().setup()
+            chrome = ChromeDriver(ChromeOptions().apply {
+                addArguments("--headless")
+                addArguments("--disable-gpu")
+            })
         }
 
         @JvmStatic
@@ -31,14 +35,6 @@ open class BaseBrowserTest  {
         fun tearDown() {
             chrome.quit()
         }
-    }
-
-    @Before
-    fun beforeEach() {
-        chrome = ChromeDriver(ChromeOptions().apply {
-            addArguments("--headless")
-            addArguments("--disable-gpu")
-        })
     }
 
     fun runTest(role: Role, resetDb: Boolean = false, test: Runnable) {
