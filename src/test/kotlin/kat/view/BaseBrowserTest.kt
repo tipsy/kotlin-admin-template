@@ -1,18 +1,16 @@
-package kat.browser
+package kat.view
 
 import io.github.bonigarcia.wdm.WebDriverManager
 import io.javalin.Javalin
-import kat.api.BaseApiTest
 import kat.auth.Role
 import kat.createApp
 import kat.util.resetDatabase
 import org.junit.AfterClass
-import org.junit.Before
 import org.junit.BeforeClass
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 
-open class BaseBrowserTest  {
+open class BaseBrowserTest {
     companion object {
         lateinit var app: Javalin
         lateinit var origin: String

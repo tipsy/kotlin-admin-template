@@ -1,4 +1,4 @@
-package kat.browser
+package kat.view
 
 import kat.auth.Role
 import org.assertj.core.api.Assertions.assertThat
@@ -31,6 +31,12 @@ class TestPages : BaseBrowserTest() {
         chrome.get("$origin/accounts")
         assertThat(chrome.pageSource).contains("This page shows all the user-accounts")
         assertThat(chrome.pageSource).doesNotContain("There's a rumor that the admin credentials")
+    }
+
+    @Test
+    fun `unknown url gives 404 page`() = runTest(Role.ADMIN) {
+        chrome.get("$origin/${Math.random()}")
+        assertThat(chrome.pageSource).contains("<h1>Page not found</h1>")
     }
 
 }

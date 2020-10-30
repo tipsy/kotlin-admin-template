@@ -1,8 +1,8 @@
 package kat.account
 
+import io.javalin.http.Context
 import kat.auth.AccountService
 import kat.auth.Role
-import io.javalin.http.Context
 
 data class UpdateRequest(val role: Role)
 

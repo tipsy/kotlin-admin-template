@@ -4,7 +4,6 @@ import kat.Database
 import kat.auth.AccountService
 import kat.auth.Role
 import kat.example.ExampleService
-import org.jdbi.v3.core.kotlin.mapTo
 
 fun resetDatabase(logStatus: Boolean = false) {
     if (logStatus) println("Setting up database...")
@@ -20,6 +19,9 @@ fun resetDatabase(logStatus: Boolean = false) {
 
     val adminUser = "admin@kat.kat"
     AccountService.create(id = adminUser, password = "password", role = Role.ADMIN)
+    AccountService.create(id = "user@example.com", password = "password", role = Role.USER)
+    AccountService.create(id = "another-user@example.com", password = "password", role = Role.USER)
+    AccountService.create(id = "last-user@example.com", password = "password", role = Role.USER)
     ExampleService.create(text = "One of a number of things, or a part of something, taken to show the character of the whole", createdBy = adminUser)
     ExampleService.create(text = "A pattern or model, as of something to be imitated or avoided", createdBy = adminUser)
     ExampleService.create(text = "An instance serving for illustration; specimen", createdBy = adminUser)

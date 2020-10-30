@@ -1,7 +1,7 @@
 package kat.example
 
-import kat.auth.userInfo
 import io.javalin.http.Context
+import kat.auth.userInfo
 
 data class CreateRequest(val text: String)
 
@@ -9,7 +9,7 @@ object ExampleController {
 
     fun create(ctx: Context) {
         val createRequest = ctx.bodyValidator<CreateRequest>()
-            .check({ it.text.trim().length >= 6}, "Text must be at least 6 characters")
+            .check({ it.text.trim().length >= 6 }, "Text must be at least 6 characters")
             .get()
         ExampleService.create(createRequest.text, ctx.userInfo!!.id)
         ctx.status(201)
