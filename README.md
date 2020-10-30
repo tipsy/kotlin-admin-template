@@ -29,10 +29,12 @@ The project is packaged by feature rather than layer, for example `accounts` and
 
 The frontend is based on having one Vue app per URL, and routing is done server side. This allows you to re-use your auth logic for both backend and frontend routes. The frontend architecture is described in detail in [this tutorial](https://javalin.io/tutorials/simple-frontends-with-javalin-and-vue).
 
+#### Directory overview
+
 ```
 kotlin-admin-template
-├──src                         
-│  ├───main
+├──src
+│  ├──main
 │  │  ├──kotlin
 │  │  │  └──kat
 │  │  │     ├──account     //crud for user accounts
@@ -42,13 +44,15 @@ kotlin-admin-template
 │  │  │     └──Main.kt     //server config, routes and main function
 │  │  └──resources
 │  │     ├──public         //static files (logos, illustrations)
-│  │     └──vue            //vue files 
+│  │     └──vue            //vue files
 │  │        ├──components  //reusable vue components
 │  │        ├──pages       //one-off vue components (pages with URLs)
 │  │        └──layout.html //vue setup file
-│  └───test                //integration tests
-│      ├───api             //http-client tests towards api
-│      └───view            //browser tests (selenium)
+│  └──test
+│     └──kotlin
+│        └──kat
+│           ├──api         //http-client tests towards api
+│           └──view        //browser tests (selenium)
 └──pom.xml
 ```
 
