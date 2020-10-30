@@ -1,5 +1,6 @@
 .idea
 kotlin-admin-template.iml
+debug.log
 
 target/
 pom.xml.tag

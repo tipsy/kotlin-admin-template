@@ -28,6 +28,8 @@ private fun Context.refreshUserInfo() {
     if (Config.allowFakeLogin) {
         if (this.queryParam("user") != null && this.queryParam("role") != null) {
             this.userInfo = UserInfo(this.queryParam("user")!!, Role.valueOf(this.queryParam("role")!!))
+        } else if (this.queryParam("clear-login") != null) {
+            this.userInfo = null
         }
     } else { // if it's not a fake login we refresh userinfo (but only if it's already set)
         this.userInfo?.let { this.userInfo = UserInfo(it.id, AccountService.findById(it.id)!!.role) }

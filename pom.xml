@@ -103,21 +103,12 @@
             <version>3.17.2</version>
             <scope>test</scope>
         </dependency>
-        <!-- Unit -->
-        <dependency>
-            <groupId>io.mockk</groupId>
-            <artifactId>mockk</artifactId>
-            <version>1.10.2</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Functional -->
         <dependency>
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
             <version>3.11.02</version>
             <scope>test</scope>
         </dependency>
-        <!-- End to end -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
