@@ -39,6 +39,7 @@
             <li>Setup your own session database (<a href="https://javalin.io/tutorials/jetty-session-handling" target="_blank">tutorial</a>)</li>
             <li>Connect to a login provider, such as <a href="https://auth0.com/" target="_blank">auth0</a></li>
             <li>Replace SQLite with <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a> (or similar)</li>
+            <li>Setup a database migration tool (like <a href="https://liquibase.org" target="_blank">liquibase</a>)</li>
         </ul>
     </app-frame>
 </template>

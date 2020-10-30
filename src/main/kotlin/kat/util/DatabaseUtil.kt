@@ -4,11 +4,7 @@ import kat.Database
 import kat.auth.AccountService
 import kat.auth.Role
 import kat.example.ExampleService
-
-// database-setup/reset
-fun main() {
-    resetDatabase(logStatus = true)
-}
+import org.jdbi.v3.core.kotlin.mapTo
 
 fun resetDatabase(logStatus: Boolean = false) {
     if (logStatus) println("Setting up database...")
@@ -31,4 +27,17 @@ fun resetDatabase(logStatus: Boolean = false) {
     ExampleService.create(text = "An instance, especially of punishment, serving as a warning to others:", createdBy = adminUser)
 
     if (logStatus) println("Database setup complete!")
+}
+
+// You'll probably want to remove this code
+// Also, consider https://liquibase.org for DB migrations
+fun initDatabaseIfEmpty() {
+    val result = Database.withHandle<Int, Exception> { handle ->
+        handle.createQuery("SELECT COUNT(*) name FROM sqlite_master WHERE type='table' and name='account'")
+            .mapTo(Int::class.java)
+            .one()
+    }
+    if (result != 1) {
+        resetDatabase(logStatus = true)
+    }
 }

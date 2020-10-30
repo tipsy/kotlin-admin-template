@@ -12,9 +12,10 @@ import kat.auth.Role.*
 import kat.auth.Session
 import kat.auth.userInfo
 import kat.example.ExampleController
+import kat.util.initDatabaseIfEmpty
 
 fun main() {
-    createApp().start(Config.port)
+    createApp().start(Config.port).also { initDatabaseIfEmpty() }
 }
 
 fun createApp(): Javalin { // this is wrapped in a function to enable spinning up server instances for unit tests
