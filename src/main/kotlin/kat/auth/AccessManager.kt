@@ -2,6 +2,7 @@ package kat.auth
 
 import io.javalin.http.Context
 import io.javalin.http.Handler
+import kat.Config
 import java.io.Serializable
 import io.javalin.core.security.Role as JavalinRole
 
@@ -23,8 +24,14 @@ object AccessManager {
     }
 }
 
-private fun Context.refreshUserInfo() = this.userInfo?.let {
-    this.userInfo = UserInfo(it.id, AccountService.findById(it.id)!!.role)
+private fun Context.refreshUserInfo() {
+    if (Config.allowFakeLogin) {
+        if (this.queryParam("user") != null && this.queryParam("role") != null) {
+            this.userInfo = UserInfo(this.queryParam("user")!!, Role.valueOf(this.queryParam("role")!!))
+        }
+    } else { // if it's not a fake login we refresh userinfo (but only if it's already set)
+        this.userInfo?.let { this.userInfo = UserInfo(it.id, AccountService.findById(it.id)!!.role) }
+    }
 }
 
 data class UserInfo(val id: String, val role: Role) : Serializable // must be serializable to store in session file/db

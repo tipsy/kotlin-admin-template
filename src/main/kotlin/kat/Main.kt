@@ -1,5 +1,10 @@
 package kat
 
+import io.javalin.Javalin
+import io.javalin.apibuilder.ApiBuilder.*
+import io.javalin.core.security.SecurityUtil.roles
+import io.javalin.plugin.rendering.vue.JavalinVue
+import io.javalin.plugin.rendering.vue.VueComponent
 import kat.account.AccountController
 import kat.auth.AccessManager
 import kat.auth.AuthController
@@ -7,13 +12,12 @@ import kat.auth.Role.*
 import kat.auth.Session
 import kat.auth.userInfo
 import kat.example.ExampleController
-import io.javalin.Javalin
-import io.javalin.apibuilder.ApiBuilder.*
-import io.javalin.core.security.SecurityUtil.roles
-import io.javalin.plugin.rendering.vue.JavalinVue
-import io.javalin.plugin.rendering.vue.VueComponent
 
 fun main() {
+    createApp().start(Config.port)
+}
+
+fun createApp(): Javalin { // this is wrapped in a function to enable spinning up server instances for unit tests
 
     val app = Javalin.create {
         it.addStaticFiles("/public")
@@ -22,7 +26,7 @@ fun main() {
         it.accessManager(AccessManager::manage)
         JavalinVue.stateFunction = { ctx -> mapOf("userInfo" to ctx.userInfo) }
         JavalinVue.optimizeDependencies = true
-    }.start(Config.port)
+    }
 
     app.routes { // view routes
         get("/", VueComponent("home-page"), roles(USER, ADMIN))
@@ -59,5 +63,7 @@ fun main() {
         error(401, "html", VueComponent("unauthorized-page"))
         error(404, "html", VueComponent("not-found-page"))
     }
+
+    return app
 
 }

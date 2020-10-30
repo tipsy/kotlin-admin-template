@@ -3,7 +3,8 @@
         <div class="d-flex justify-space-between align-center mb-3">
             <h1>Examples</h1>
             <v-btn small depressed @click="createExample()" color="green darken-2" dark rounded>
-                <v-icon small>mdi-plus</v-icon> Add example
+                <v-icon small>mdi-plus</v-icon>
+                Add example
             </v-btn>
         </div>
         <p>
@@ -32,7 +33,7 @@
             createExample() {
                 let text = prompt("Enter your example text")
                 if (text) {
-                    axios.post("/api/examples", text)
+                    axios.post("/api/examples", {text: text})
                         .then(() => this.loadExamples())
                         .catch(() => alert("Failed to create example"))
                 }

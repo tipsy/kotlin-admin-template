@@ -4,14 +4,14 @@ import kat.Database
 import org.jdbi.v3.core.kotlin.bindKotlin
 import org.mindrot.jbcrypt.BCrypt
 
-data class Account(val id: String, val password: String, val role: Role)
+data class AccountCreate(val id: String, val password: String, val role: Role)
 data class AccountView(val id: String, val role: Role)
 
 object AccountService {
 
     fun create(id: String, password: String, role: Role = Role.USER) = Database.useHandle<Exception> { handle ->
         handle.createUpdate("INSERT INTO account (id, password, role) VALUES (:id, :password, :role)")
-            .bindKotlin(Account(id, BCrypt.hashpw(password, BCrypt.gensalt()), role))
+            .bindKotlin(AccountCreate(id, BCrypt.hashpw(password, BCrypt.gensalt()), role))
             .execute()
     }
 
@@ -19,14 +19,14 @@ object AccountService {
         handle.createQuery("SELECT * FROM account").mapTo(AccountView::class.java).list()
     }
 
-    fun findById(id: String): Account? = Database.withHandle<Account?, Exception> { handle ->
+    fun findById(id: String): AccountCreate? = Database.withHandle<AccountCreate?, Exception> { handle ->
         handle.createQuery("SELECT * FROM account WHERE id=:id")
             .bind("id", id)
-            .mapTo(Account::class.java)
+            .mapTo(AccountCreate::class.java)
             .firstOrNull()
     }
 
-    fun findByIdAndPassword(id: String, password: String): Account? {
+    fun findByIdAndPassword(id: String, password: String): AccountCreate? {
         val user = findById(id) ?: return null
         return if (BCrypt.checkpw(password, user.password)) user else null
     }

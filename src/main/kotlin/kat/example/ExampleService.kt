@@ -5,12 +5,12 @@ import org.jdbi.v3.core.kotlin.bindKotlin
 
 object ExampleService {
 
-    data class Example(val text: String, val createdBy: String)
+    data class ExampleCreate(val text: String, val createdBy: String)
     data class ExampleView(val id: Int, val text: String, val createdBy: String)
 
     fun create(text: String, createdBy: String) = Database.useHandle<Exception> { handle ->
         handle.createUpdate("INSERT INTO example (text, created_by) VALUES (:text, :createdBy)")
-            .bindKotlin(Example(text, createdBy))
+            .bindKotlin(ExampleCreate(text, createdBy))
             .execute()
     }
 

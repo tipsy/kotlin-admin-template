@@ -1,23 +1,52 @@
-//package io.javalin.example.kotlin
-//
-//import io.javalin.plugin.json.JavalinJson
-//import kong.unirest.HttpResponse
-//import kong.unirest.Unirest
-//import org.assertj.core.api.Assertions.assertThat
-//import org.junit.Test
-//
-//class FunctionalTest {
-//
-//    private val app = JavalinApp() // inject any dependencies you might have
-//    private val usersJson = JavalinJson.toJson(UserController.users)
-//
-//    @Test
-//    fun `GET to fetch users returns list of users`() {
-//        app.start(1234)
-//        val response: HttpResponse<String> = Unirest.get("http://localhost:1234/users").asString()
-//        assertThat(response.status).isEqualTo(200)
-//        assertThat(response.body).isEqualTo(usersJson)
-//        app.stop()
-//    }
-//
-//}
+package kat
+
+import kat.auth.Role
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
+
+class FunctionalTest : BaseFunctionalTest() {
+
+    @Test
+    fun `POST examples accepts valid example`() {
+        val validExample = """{"text": "My example"}"""
+        runTest(Role.USER, resetDb = true) {
+            val response = http.post("/api/examples/").body(validExample).asString()
+            assertThat(response.status).isEqualTo(201)
+        }
+    }
+
+    @Test
+    fun `POST examples rejects invalid example`() {
+        val invalidExample = """{"text": "My      "}"""
+        runTest(Role.USER) {
+            val response = http.post("/api/examples/").body(invalidExample).asString()
+            assertThat(response.status).isEqualTo(400)
+            assertThat(response.body).contains("Text must be at least 6 characters")
+        }
+    }
+
+    @Test
+    fun `GET accounts is not available for USER`() {
+        runTest(Role.USER) {
+            val response = http.get("/api/accounts/").asString()
+            assertThat(response.status).isEqualTo(401)
+        }
+    }
+
+    @Test
+    fun `GET accounts is available for ADMIN`() {
+        runTest(Role.ADMIN) {
+            val response = http.get("/api/accounts/").asString()
+            assertThat(response.status).isEqualTo(200)
+        }
+    }
+
+    @Test
+    fun `GET anything is redirected to login for unauthenticated user`() {
+        runTest(Role.UNAUTHENTICATED) {
+            val response = http.get("/").asString()
+            assertThat(response.body).contains("<sign-in-page></sign-in-page>")
+        }
+    }
+
+}
