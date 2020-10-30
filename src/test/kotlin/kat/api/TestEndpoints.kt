@@ -4,6 +4,8 @@ import kat.auth.Role
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
+// You have to set environment variable USE_FAKE_LOGIN=true
+// or change Config.kt to run these tests
 class TestEndpoints : BaseApiTest() {
 
     @Test

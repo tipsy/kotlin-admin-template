@@ -25,15 +25,9 @@ object AccessManager {
 }
 
 private fun Context.refreshUserInfo() {
-    if (Config.allowFakeLogin) {
-        if (this.queryParam("user") != null && this.queryParam("role") != null) {
-            this.userInfo = UserInfo(this.queryParam("user")!!, Role.valueOf(this.queryParam("role")!!))
-        } else if (this.queryParam("clear-login") != null) {
-            this.userInfo = null
-        }
-    } else { // if it's not a fake login we refresh userinfo (but only if it's already set)
-        this.userInfo?.let { this.userInfo = UserInfo(it.id, AccountService.findById(it.id)!!.role) }
-    }
+    if (Config.useFakeLogin) return doFakeLogin()
+    // if it's not a test-related login we refresh the userinfo (but only if it's already set)
+    this.userInfo?.let { this.userInfo = UserInfo(it.id, AccountService.findById(it.id)!!.role) }
 }
 
 data class UserInfo(val id: String, val role: Role) : Serializable // must be serializable to store in session file/db
@@ -41,3 +35,15 @@ data class UserInfo(val id: String, val role: Role) : Serializable // must be se
 var Context.userInfo: UserInfo?
     get() = this.sessionAttribute("USER_INFO")
     set(userInfo) = this.sessionAttribute("USER_INFO", userInfo)
+
+/**
+ * This method is used for testing in [src.test.kotlin.kat.api.TestEndpoints]
+ * and [src.test.kotlin.kat.view.TestPages].
+ */
+private fun Context.doFakeLogin() {
+    if (this.queryParam("user") != null && this.queryParam("role") != null) {
+        this.userInfo = UserInfo(this.queryParam("user")!!, Role.valueOf(this.queryParam("role")!!))
+    } else if (this.queryParam("clear-login") != null) {
+        this.userInfo = null
+    }
+}
