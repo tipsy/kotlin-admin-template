@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="36px" height="13px" viewBox="0 0 36 13" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <desc>Created with Lunacy</desc>
+  <defs>
+    <rect width="35.320312" height="12.796875" id="artboard_1" />
+    <clipPath id="clip_1">
+      <use xlink:href="#artboard_1" clip-rule="evenodd" />
+    </clipPath>
+  </defs>
+  <g id="logo" clip-path="url(#clip_1)">
+    <path d="M3.08496 9.42188L4.35059 8.0332L7.07519 12.7969L10.7314 12.7969L6.40723 5.66016L10.7314 0L6.91699 0L4.15723 4.0166L3.08496 5.64258L3.08496 0L0 0L0 12.7969L3.08496 12.7969L3.08496 9.42188ZM16.0547 10.4063L20.2822 10.4063L21.0293 12.7969L24.3428 12.7969L19.6143 0L16.7139 0L12.0205 12.7969L15.3164 12.7969L16.0547 10.4063ZM35.3203 2.38184L31.4795 2.38184L31.4795 12.7969L28.3945 12.7969L28.3945 2.38184L24.624 2.38184L24.624 0L35.3203 0L35.3203 2.38184ZM16.793 8.02441L19.5439 8.02441L18.1641 3.58594L16.793 8.02441Z" id="KAT" fill="#000000" fill-rule="evenodd" stroke="none" />
+  </g>
+</svg>
