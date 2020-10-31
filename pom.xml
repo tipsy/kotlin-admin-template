@@ -179,6 +179,16 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <!-- Set USE_FAKE_LOGIN during test phase -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <environmentVariables>
+                        <USE_FAKE_LOGIN>true</USE_FAKE_LOGIN>
+                    </environmentVariables>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

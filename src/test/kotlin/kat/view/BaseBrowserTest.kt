@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager
 import io.javalin.Javalin
 import kat.auth.Role
 import kat.createApp
+import kat.util.initDatabaseIfEmpty
 import kat.util.resetDatabase
 import org.junit.AfterClass
 import org.junit.BeforeClass
@@ -19,7 +20,7 @@ open class BaseBrowserTest {
         @JvmStatic
         @BeforeClass
         fun setup() {
-            app = createApp().apply { config.showJavalinBanner = false }.start(0)
+            app = createApp().apply { config.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
             origin = "http://localhost:${app.port()}"
             WebDriverManager.chromedriver().setup()
             chrome = ChromeDriver(ChromeOptions().apply {

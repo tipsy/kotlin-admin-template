@@ -3,6 +3,7 @@ package kat.api
 import io.javalin.Javalin
 import kat.auth.Role
 import kat.createApp
+import kat.util.initDatabaseIfEmpty
 import kat.util.resetDatabase
 import kong.unirest.Unirest
 import kong.unirest.UnirestInstance
@@ -17,7 +18,7 @@ open class BaseApiTest {
         @JvmStatic
         @BeforeClass
         fun beforeClass() {
-            app = createApp().apply { config.showJavalinBanner = false }.start(0)
+            app = createApp().apply { config.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
             http = Unirest.spawnInstance().apply { config().defaultBaseUrl("http://localhost:${app.port()}") }
         }
 
