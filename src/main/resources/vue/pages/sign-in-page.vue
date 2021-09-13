@@ -48,8 +48,7 @@
                     window.location = "/"
                 }).catch(async error => {
                     await new Promise(resolve => setTimeout(resolve, 500)); // feels too fast otherwise
-                    let errorPrefix = "Request body as Credentials invalid - "
-                    this.errorMessage = error.response.data.title.replace(errorPrefix, "");
+                    this.errorMessage = error.response.data.title || error.response.data["REQUEST_BODY"][0].message
                     this.errorAlert = true;
                 });
             },

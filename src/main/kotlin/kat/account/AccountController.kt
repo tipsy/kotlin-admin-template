@@ -13,13 +13,13 @@ object AccountController {
     }
 
     fun update(ctx: Context) {
-        val accountId = ctx.pathParam<String>("account-id").get()
-        val updateRequest = ctx.body<UpdateRequest>()
+        val accountId = ctx.pathParam("account-id")
+        val updateRequest = ctx.bodyAsClass<UpdateRequest>()
         AccountService.updateById(accountId, updateRequest.role)
     }
 
     fun delete(ctx: Context) {
-        val accountId = ctx.pathParam<String>("account-id").get()
+        val accountId = ctx.pathParam("account-id")
         val deleted = AccountService.deleteById(accountId)
         ctx.status(if (deleted) 204 else 404)
     }

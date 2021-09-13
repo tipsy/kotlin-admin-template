@@ -20,7 +20,7 @@ object ExampleController {
     }
 
     fun delete(ctx: Context) {
-        val exampleId = ctx.pathParam<Int>("example-id").get()
+        val exampleId = ctx.pathParamAsClass<Int>("example-id").get()
         val deleted = ExampleService.deleteByIdAndOwner(exampleId, ctx.userInfo!!.id)
         ctx.status(if (deleted) 204 else 404)
     }

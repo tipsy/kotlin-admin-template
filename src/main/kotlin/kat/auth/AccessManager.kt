@@ -1,19 +1,19 @@
 package kat.auth
 
+import io.javalin.core.security.RouteRole
 import io.javalin.http.Context
 import io.javalin.http.Handler
 import kat.Config
 import java.io.Serializable
-import io.javalin.core.security.Role as JavalinRole
 
-enum class Role : JavalinRole {
+enum class Role : RouteRole {
     UNAUTHENTICATED,
     USER,
     ADMIN
 }
 
 object AccessManager {
-    fun manage(handler: Handler, ctx: Context, permittedRoles: Set<JavalinRole>) {
+    fun manage(handler: Handler, ctx: Context, permittedRoles: Set<RouteRole>) {
         ctx.refreshUserInfo() // make sure role matches database role
         when {
             Role.UNAUTHENTICATED in permittedRoles -> handler.handle(ctx)

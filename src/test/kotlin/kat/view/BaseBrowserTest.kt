@@ -20,7 +20,7 @@ open class BaseBrowserTest {
         @JvmStatic
         @BeforeClass
         fun setup() {
-            app = createApp().apply { config.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
+            app = createApp().apply { _conf.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
             origin = "http://localhost:${app.port()}"
             WebDriverManager.chromedriver().setup()
             chrome = ChromeDriver(ChromeOptions().apply {

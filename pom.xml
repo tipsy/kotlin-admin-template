@@ -12,7 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kotlin.version>1.4.10</kotlin.version>
+        <kotlin.version>1.5.20</kotlin.version>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
         <kotlin.code.style>official</kotlin.code.style>
         <junit.version>4.12</junit.version>
@@ -22,12 +22,12 @@
         <dependency>
             <groupId>io.javalin</groupId>
             <artifactId>javalin</artifactId>
-            <version>3.12.0</version>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.30</version>
+            <version>1.7.32</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>

@@ -2,7 +2,7 @@ package kat.auth
 
 import io.javalin.http.BadRequestResponse
 import io.javalin.http.Context
-import io.javalin.http.util.RateLimit
+import io.javalin.http.util.NaiveRateLimit
 import java.util.concurrent.TimeUnit
 
 data class Credentials(val userId: String, val password: String)
@@ -10,7 +10,7 @@ data class Credentials(val userId: String, val password: String)
 object AuthController {
 
     fun signUp(ctx: Context) {
-        RateLimit(ctx).requestPerTimeUnit(20, TimeUnit.HOURS)
+        NaiveRateLimit.requestPerTimeUnit(ctx, 20, TimeUnit.HOURS)
         val (userId, password) = ctx.bodyValidator<Credentials>()
             .check({ it.userId.trim().length >= 6 }, "User ID must be at least 6 characters")
             .check({ it.password.trim().length >= 6 }, "Password must be at least 6 characters")
@@ -24,7 +24,7 @@ object AuthController {
     }
 
     fun signIn(ctx: Context) {
-        RateLimit(ctx).requestPerTimeUnit(20, TimeUnit.HOURS)
+        NaiveRateLimit.requestPerTimeUnit(ctx, 20, TimeUnit.HOURS)
         val (userId, password) = ctx.bodyValidator<Credentials>()
             .check({ it.userId.isNotBlank() && it.password.isNotBlank() }, "Both fields are required")
             .get()
