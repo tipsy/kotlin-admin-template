@@ -27,7 +27,10 @@ object AccessManager {
 private fun Context.refreshUserInfo() {
     if (Config.useFakeLogin) return doFakeLogin()
     // if it's not a test-related login we refresh the userinfo (but only if it's already set)
-    this.userInfo?.let { this.userInfo = UserInfo(it.id, AccountService.findById(it.id)!!.role) }
+    this.userInfo?.let {
+        val accountCreate = AccountService.findById(it.id)
+        this.userInfo = accountCreate?.let { UserInfo(this.userInfo!!.id, accountCreate.role) }
+    }
 }
 
 data class UserInfo(val id: String, val role: Role) : Serializable // must be serializable to store in session file/db

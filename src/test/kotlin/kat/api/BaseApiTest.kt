@@ -1,6 +1,7 @@
 package kat.api
 
 import io.javalin.Javalin
+import kat.Config
 import kat.auth.Role
 import kat.createApp
 import kat.util.initDatabaseIfEmpty
@@ -18,6 +19,8 @@ open class BaseApiTest {
         @JvmStatic
         @BeforeClass
         fun beforeClass() {
+            // We use fake login for most test cases
+            Config.useFakeLogin = true
             app = createApp().apply { _conf.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
             http = Unirest.spawnInstance().apply { config().defaultBaseUrl("http://localhost:${app.port()}") }
         }

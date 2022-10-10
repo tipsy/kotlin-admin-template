@@ -2,6 +2,7 @@ package kat.view
 
 import io.github.bonigarcia.wdm.WebDriverManager
 import io.javalin.Javalin
+import kat.Config
 import kat.auth.Role
 import kat.createApp
 import kat.util.initDatabaseIfEmpty
@@ -20,6 +21,8 @@ open class BaseBrowserTest {
         @JvmStatic
         @BeforeClass
         fun setup() {
+            // We use fake login for most test cases
+            Config.useFakeLogin = true
             app = createApp().apply { _conf.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
             origin = "http://localhost:${app.port()}"
             WebDriverManager.chromedriver().setup()
