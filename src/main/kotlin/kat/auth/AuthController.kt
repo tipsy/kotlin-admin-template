@@ -11,7 +11,7 @@ object AuthController {
 
     fun signUp(ctx: Context) {
         NaiveRateLimit.requestPerTimeUnit(ctx, 20, TimeUnit.HOURS)
-        val (userId, password) = ctx.bodyValidator<Credentials>()
+        val (userId, password) = ctx.bodyValidator(Credentials::class.java)
             .check({ it.userId.trim().length >= 6 }, "User ID must be at least 6 characters")
             .check({ it.password.trim().length >= 6 }, "Password must be at least 6 characters")
             .get()
@@ -25,7 +25,7 @@ object AuthController {
 
     fun signIn(ctx: Context) {
         NaiveRateLimit.requestPerTimeUnit(ctx, 20, TimeUnit.HOURS)
-        val (userId, password) = ctx.bodyValidator<Credentials>()
+        val (userId, password) = ctx.bodyValidator(Credentials::class.java)
             .check({ it.userId.isNotBlank() && it.password.isNotBlank() }, "Both fields are required")
             .get()
         val user = AccountService.findByIdAndPassword(userId, password) ?: throw BadRequestResponse("Incorrect user ID or password")

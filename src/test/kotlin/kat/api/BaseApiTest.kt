@@ -21,7 +21,7 @@ open class BaseApiTest {
         fun beforeClass() {
             // We use fake login for most test cases
             Config.useFakeLogin = true
-            app = createApp().apply { _conf.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
+            app = createApp().apply { cfg.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
             http = Unirest.spawnInstance().apply { config().defaultBaseUrl("http://localhost:${app.port()}") }
         }
 

@@ -3,8 +3,7 @@ package kat
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.http.staticfiles.Location
-import io.javalin.plugin.rendering.vue.JavalinVue
-import io.javalin.plugin.rendering.vue.VueComponent
+import io.javalin.vue.VueComponent
 import kat.account.AccountController
 import kat.auth.AccessManager
 import kat.auth.AuthController
@@ -21,11 +20,11 @@ fun main() {
 fun createApp(): Javalin { // this is wrapped in a function to enable spinning up server instances for unit tests
 
     val app = Javalin.create {
-        it.addStaticFiles("/public", Location.CLASSPATH)
-        it.enableWebjars()
-        it.sessionHandler { Session.fileSessionHandler() }
+        it.staticFiles.add("/public", Location.CLASSPATH)
+        it.staticFiles.enableWebjars()
+        it.jetty.sessionHandler { Session.fileSessionHandler() }
         it.accessManager(AccessManager::manage)
-        JavalinVue.stateFunction = { ctx -> mapOf("userInfo" to ctx.userInfo) }
+        it.vue.stateFunction = { ctx -> mapOf("userInfo" to ctx.userInfo) }
     }
 
     app.routes { // view routes
