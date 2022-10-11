@@ -23,7 +23,7 @@ open class BaseBrowserTest {
         fun setup() {
             // We use fake login for most test cases
             Config.useFakeLogin = true
-            app = createApp().apply { _conf.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
+            app = createApp().apply { cfg.showJavalinBanner = false }.start(0).also { initDatabaseIfEmpty() }
             origin = "http://localhost:${app.port()}"
             WebDriverManager.chromedriver().setup()
             chrome = ChromeDriver(ChromeOptions().apply {

@@ -14,7 +14,7 @@ object AccountController {
 
     fun update(ctx: Context) {
         val accountId = ctx.pathParam("account-id")
-        val updateRequest = ctx.bodyAsClass<UpdateRequest>()
+        val updateRequest = ctx.bodyAsClass(UpdateRequest::class.java)
         AccountService.updateById(accountId, updateRequest.role)
     }
 

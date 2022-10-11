@@ -1,8 +1,8 @@
 package kat.auth
 
-import io.javalin.core.security.RouteRole
 import io.javalin.http.Context
 import io.javalin.http.Handler
+import io.javalin.security.RouteRole
 import kat.Config
 import java.io.Serializable
 
